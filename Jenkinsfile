@@ -7,7 +7,6 @@ pipeline {
                 // script {
                 //     sh "docker-compose  up -d --build"
                 // }
-                echo "deploying...."
             }
         }
     }
@@ -17,4 +16,3 @@ pipeline {
             cleanWs()
         }
     }
-}
