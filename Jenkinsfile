@@ -15,6 +15,9 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                 script {
+                    sh "docker-compose -f ${env.COMPOSE_FILE} up -d"
+                }
             }
         }
     }
