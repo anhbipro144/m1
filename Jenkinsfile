@@ -1,24 +1,14 @@
 pipeline {
-    agent any
+  agent any
+  stages {
+    stage('Deploy') {
+      steps {
+        script {
+          sh "pwd && ls -la && docker-compose --profile main up -d --build"
+        }
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-                 script {
-                    sh "docker-compose -f ${env.COMPOSE_FILE} up -d"
-                }
-            }
-        }
+      }
     }
+
+  }
 }
