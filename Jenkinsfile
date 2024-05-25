@@ -1,23 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
-      steps {
-        echo 'Building..'
-      }
-    }
-
-    stage('Test') {
-      steps {
-        echo 'Testing..'
-      }
-    }
-
     stage('Deploy') {
       steps {
-        echo 'Deploying....'
         script {
-          sh "pwd && ls -la"
+          sh "pwd && ls -la && docker-compose up -d --build"
         }
 
       }
