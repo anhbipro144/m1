@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: ./apps/m1/Dockerfile
     command: npm run dev m1
+    profiles: [main]
     depends_on:
       - m2
       - rabbitmq
@@ -15,25 +16,34 @@ services:
     build:
       dockerfile: ./apps/m2/Dockerfile
     command: npm run dev m2
+    profiles: [main]
     depends_on:
       - rabbitmq
     # networks:
     #   - app-network
   rabbitmq:
-    container_name: primary_db
     image: rabbitmq
+    profiles: [main]
     ports:
       - '5672:5672'
   jenkins:
-    image: jenkins/jenkins:jdk17
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    profiles: [jenkins]
     ports:
       - '8080:8080'
       - '50000:50000'
     volumes:
-      # - jenkins_home:/var/jenkins_home
+      - type: volume
+        source: test
+        target: /var/jenkins_home/
       - /var/run/docker.sock:/var/run/docker.sock
-  # volumes:
-  #   jenkins_home:
+    # volumes:
+    # - jenkins_home:/var/jenkins_home
+    # - C:/Neo/Work/Metapolis/Random/TestMicroservices/microservices:/workspace
+volumes:
+  test:
 # networks:
 #   app-network:
 #     driver: bridge
