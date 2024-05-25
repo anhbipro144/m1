@@ -17,7 +17,7 @@ pipeline {
       steps {
         echo 'Deploying....'
         script {
-          sh "cd workspace/ && ls"
+          sh "pwd && ls"
         }
 
       }
