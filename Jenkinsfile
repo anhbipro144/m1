@@ -17,7 +17,7 @@ pipeline {
       steps {
         echo 'Deploying....'
         script {
-          sh "docker-compose up "
+          sh "cd workspace/ && ls"
         }
 
       }
