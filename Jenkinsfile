@@ -17,7 +17,7 @@ pipeline {
       steps {
         echo 'Deploying....'
         script {
-          sh "pwd && ls"
+          sh "pwd && ls -la"
         }
 
       }
